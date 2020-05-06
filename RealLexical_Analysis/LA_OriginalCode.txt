@@ -1,0 +1,38 @@
+hjdhfd;
+123;123.6; 
+0x1F.32; 
+0X2f; 
+07456; 
+03635.5; 
+0 92+data> 0x3f 00 while a+acc>xx do x=x-1; 
+a=6.2+a*0X88.80; 
+if a>b then a=b else a=b-1+c; 
+int main()
+{
+    //打开一个文件，读取其中的源程序
+    char OriginalCode[10000];
+    char PendingStr[20] = { 0 };
+    int syn = -1, i;//初始化
+    int curStr = 0;//源程序指针
+    FILE *fp, *fp1;
+    if ((fp = fopen("zyr_rc.txt", "r")) == NULL)
+    {//打开源程序
+        cout << "can't open this file";
+        exit(0);
+    }
+    OriginalCode[curStr] = fgetc(fp);
+    while (!feof(fp))
+    {//将源程序读入OriginalCode[]数组
+        curStr++;
+        OriginalCode[curStr] = fgetc(fp);
+    }
+	OriginalCode[curStr] = '$';
+    OriginalCode[++curStr] = '\0';
+    fclose(fp);
+    cout << endl << "源程序为:" << endl;
+    cout << OriginalCode << endl;
+    //对源程序进行过滤
+    FilterCode(OriginalCode, curStr);
+    cout << endl << "过滤之后的程序:" << endl;
+    cout << OriginalCode << endl;
+    curStr = 0;//从头开始读
